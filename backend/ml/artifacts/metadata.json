@@ -1,0 +1,14 @@
+{
+  "architecture": "ConvAutoencoder (see ml/train_autoencoder.py)",
+  "image_size": 128,
+  "trained_on": "MVTec AD - bottle category, train/good split (209 images)",
+  "epochs": 50,
+  "evaluation": {
+    "test_set": "MVTec AD bottle test split (20 good, 63 defective)",
+    "roc_auc": 0.9079365079365079,
+    "threshold": 0.0021938947,
+    "threshold_method": "Youden's J statistic on ROC curve",
+    "recall_defective": 0.7619047619047619,
+    "false_positive_rate_good": 0.05
+  }
+}

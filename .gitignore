@@ -21,6 +21,13 @@ dist/
 # Model artifacts (large binaries — track separately if needed)
 *.pt
 *.pth
+# ...except the actual shipped model — small (~4MB) and required for the
+# app to run out of the box without retraining.
+!backend/ml/artifacts/autoencoder.pth
+
+# Raw training dataset (regenerate via ml/download_dataset.py, ~5GB — not shipped)
+backend/data/mvtec/
+backend/ml/_mvtec_raw/
 
 # OS / editor
 .DS_Store

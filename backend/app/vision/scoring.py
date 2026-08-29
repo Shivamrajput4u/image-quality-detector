@@ -5,14 +5,17 @@ normalized to a 600px-wide grayscale frame (see classical.py). They're meant
 to be revisited once real evaluation images are run through the pipeline —
 see the README's evaluation section.
 
-anomaly_score is a hook for the trained autoencoder (see anomaly_model.py).
-It's None until that model exists, so this function works standalone today
-and gets an extra signal once Step 3's training is done.
+anomaly_score comes from the trained autoencoder (see anomaly_model.py) —
+a reconstruction-error signal that flags structural defects the stats above
+can't see. ANOMALY_THRESHOLD was calibrated via Youden's J statistic on the
+MVTec AD bottle test set (see ml/artifacts/metadata.json). If no trained
+model is present, both come back None and this function falls back to the
+classical stats alone.
 """
 
 from __future__ import annotations
 
-ANOMALY_THRESHOLD = 0.5  # placeholder — recalibrated in Step 3 from the trained model's error distribution
+from app.vision.anomaly_model import ANOMALY_THRESHOLD
 
 
 def _clamp(value: float, low: float, high: float) -> float:
@@ -84,7 +87,7 @@ def score_issues(stats: dict, anomaly_score: float | None = None) -> tuple[int, 
         })
         score -= penalty
 
-    if anomaly_score is not None and anomaly_score > ANOMALY_THRESHOLD:
+    if anomaly_score is not None and ANOMALY_THRESHOLD is not None and anomaly_score > ANOMALY_THRESHOLD:
         severity = "high" if anomaly_score > ANOMALY_THRESHOLD * 2 else "medium"
         issues.append({
             "type": "potential_defect",
