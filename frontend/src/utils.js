@@ -9,3 +9,16 @@ export function toneForSeverity(severity) {
   if (severity === "medium") return "warn";
   return "bad";
 }
+
+const ISSUE_ICONS = {
+  blur: "blur",
+  underexposure: "moon",
+  overexposure: "sun",
+  noise: "droplet",
+  low_contrast: "contrast",
+  potential_defect: "zap",
+};
+
+export function iconForIssueType(type) {
+  return ISSUE_ICONS[type] || "alert";
+}

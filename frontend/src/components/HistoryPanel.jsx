@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchHistory, resolveImageUrl } from "../api";
 import Badge from "./Badge";
+import Icon from "./Icon";
 import ResultCard from "./ResultCard";
 import { toneForLabel } from "../utils";
 
@@ -28,10 +29,29 @@ export default function HistoryPanel() {
     };
   }, []);
 
-  if (status === "loading") return <p className="status-message">Loading history...</p>;
-  if (status === "error") return <p className="error-banner">{errorMessage}</p>;
+  if (status === "loading") {
+    return (
+      <div className="status-message">
+        <span className="spinner spinner-dark" />
+        Loading history...
+      </div>
+    );
+  }
+  if (status === "error") {
+    return (
+      <p className="error-banner">
+        <Icon name="alert" size={16} />
+        {errorMessage}
+      </p>
+    );
+  }
   if (items.length === 0) {
-    return <p className="status-message">No analyses yet — upload an image to get started.</p>;
+    return (
+      <div className="status-message">
+        <Icon name="image" size={28} />
+        <p>No analyses yet — upload an image to get started.</p>
+      </div>
+    );
   }
 
   return (
@@ -39,9 +59,12 @@ export default function HistoryPanel() {
       <div className="history-grid">
         {items.map((item) => (
           <button key={item.id} className="history-thumb" onClick={() => setSelected(item)}>
-            <img src={resolveImageUrl(item.image_url)} alt={item.original_filename} />
+            <div className="history-thumb-image">
+              <img src={resolveImageUrl(item.image_url)} alt={item.original_filename} />
+              <span className="history-thumb-hint">View details</span>
+            </div>
             <div className="history-thumb-info">
-              <span>{item.quality_score}</span>
+              <span className="history-thumb-score">{item.quality_score}</span>
               <Badge text={item.quality_label} tone={toneForLabel(item.quality_label)} />
             </div>
           </button>
@@ -51,7 +74,8 @@ export default function HistoryPanel() {
       {selected && (
         <div className="history-detail">
           <button className="close-detail" onClick={() => setSelected(null)}>
-            Close ✕
+            <Icon name="x" size={14} />
+            Close
           </button>
           <ResultCard result={selected} />
         </div>
