@@ -1,0 +1,16 @@
+# Everything needed to run the API, plus tooling for testing and for the
+# ml/ dataset-download/training scripts. Not installed in the Docker image —
+# see requirements.txt for the runtime-only set.
+-r requirements.txt
+
+# Testing
+pytest==8.3.4
+httpx==0.28.1
+
+# ml/ scripts only — dataset download + model training/evaluation.
+# See ml/download_dataset.py and ml/train_autoencoder.py.
+# Install torch/torchvision as a matched CPU pair via:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+torchvision==0.20.1
+scikit-learn==1.5.2
+kaggle==1.6.17

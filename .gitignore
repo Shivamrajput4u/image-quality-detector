@@ -29,7 +29,15 @@ dist/
 backend/data/mvtec/
 backend/ml/_mvtec_raw/
 
+# Runtime uploads — real user photos, never committed (data/samples/ IS committed — curated demo images)
+backend/data/uploads/*
+!backend/data/uploads/.gitkeep
+backend/data/app.db
+
 # OS / editor
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Local port-conflict overrides — machine-specific, not part of the shipped config
+docker-compose.override.yml
