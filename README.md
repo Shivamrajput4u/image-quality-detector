@@ -12,6 +12,8 @@ Upload an image, get back a quality score (0–100), a label (ACCEPTABLE / DEGRA
   <img src="docs/screenshots/upload-empty.png" width="47%" alt="Upload screen" />
   <img src="docs/screenshots/history.png" width="47%" alt="Analysis history" />
 </p>
+<img width="1532" height="692" alt="Screenshot 2026-08-29 152128" src="https://github.com/user-attachments/assets/d932cccf-7894-468e-a346-23cd40777293" />
+
 
 ## Quick start
 
