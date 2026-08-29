@@ -13,6 +13,16 @@ Upload an image, get back a quality score (0–100), a label (ACCEPTABLE / DEGRA
   <img src="docs/screenshots/history.png" width="47%" alt="Analysis history" />
 </p>
 
+## Quick start
+
+```bash
+git clone https://github.com/Shivamrajput4u/image-quality-detector.git
+cd image-quality-detector
+docker-compose up --build
+```
+
+Then open **http://localhost:5173**. That's the whole setup — the trained model, the database schema, and both services come up automatically. No API keys, no manual configuration required. (Don't have Docker? See [Getting started (manual local dev)](#getting-started-manual-local-dev) below.)
+
 ---
 
 ## What it detects
